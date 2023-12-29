@@ -21,3 +21,4 @@ def main():
 if __name__ == '__main__':
     main()
 #프로젝트 진행간 여러가지 기능이 들어가있는 유틸리티 파일
+# git kraken 사용시작!
