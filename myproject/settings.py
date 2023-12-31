@@ -121,3 +121,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Django 기본 설정 옵션은 settings.py 모듈 파일 하나로 설정한다.
