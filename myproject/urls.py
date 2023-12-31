@@ -16,9 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.urls import path, include
+
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls), # 장고가 기본적으로 가지고있는 관리자페이지로 이동하는 url
+    path('', include('myapp.urls'))
 ]
 
 # 사용자가 접속하는 path에따라서 그 요청을 누가 처리해줄까?(라우팅)해주는 파일
