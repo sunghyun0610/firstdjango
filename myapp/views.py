@@ -6,30 +6,49 @@ topics=[
     {'id':3,'title':'routing', 'body': 'Model is..'}
 ]
 
-
-
-
-def index(request):
+def HTMLTemplate(articleTag):
     global topics
-    ol=''
+    ol = ''
     for topic in topics:
-        ol +=f'<li><a href="/read/{topic["id"]}">{topic["title"]}</a></li>'
-    return HttpResponse(f'''
+        ol += f'<li><a href="/read/{topic["id"]}">{topic["title"]}</a></li>'
+    return f'''
     <html>
     <body>
-    <h1>Django</h1>
-    <ol>
+    <h1><a href="/">Django</a></h1>
+    <ul>
         {ol}
-    </ol>
-    <h2>Welcome!</h2>
-    Hello, Django~
+    </ul>
+    {articleTag}
+    <ul>
+        <li><a href="/create/">Create</a></li>
+    </ul>
     </body>
     </html>
 
-    ''')
+    '''
+
+
+def index(request):
+    article='''
+    <h2>Welcome</h2>
+    Hello, Django
+    '''
+    return HttpResponse(HTMLTemplate(article))
 
 def create(request):
-    return HttpResponse('Create')
+    article='''
+    <p><input type="text" name="title" placeholder="write title"></p> 
+    <p><textarea></textarea>
+    '''
+    # title : 입력한 데이터를 서버로 전송할때 title이라는 이름으로 감
+    # placeholder : 칸안에 도움말이다
+    return HttpResponse(HTMLTemplate(article))
 
 def read(request, id):
-    return HttpResponse('Read!'+id)
+    global topics
+    article = ''
+    for topic in topics:
+        if topic['id'] == int(id):
+            article=f'<h2>{topic["title"]}</h2>{topic["body"]}'
+
+    return HttpResponse(HTMLTemplate(article))
