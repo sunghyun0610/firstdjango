@@ -1,7 +1,8 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from django.views.decorators.csrf import csrf_exempt
 
 
+nextId=4
 topics=[
     {'id':1,'title':'routing', 'body': 'Routing is..'},
     {'id':2,'title':'view', 'body': 'View is..'},
@@ -39,16 +40,26 @@ def index(request):
     return HttpResponse(HTMLTemplate(article))
 @csrf_exempt
 def create(request):
-    article='''
-    <form action="/create/" method = "post">
-        <p><input type="text" name="title" placeholder="write title"></p> 
-        <p><textarea name="body" placeholder="body"></textarea></p>
-        <p><input type="submit" value="제출"></p>
-    </form>
-    '''
-    # title : 입력한 데이터를 서버로 전송할때 title이라는 이름으로 감
-    # placeholder : 칸안에 도움말이다
-    return HttpResponse(HTMLTemplate(article))
+    global nextId
+    if request.method == 'GET':
+        article='''
+        <form action="/create/" method = "post">
+            <p><input type="text" name="title" placeholder="write title"></p> 
+            <p><textarea name="body" placeholder="body"></textarea></p>
+            <p><input type="submit" value="제출"></p>
+        </form>
+        '''
+        # title : 입력한 데이터를 서버로 전송할때 title이라는 이름으로 감
+        # placeholder : 칸안에 도움말이다
+        return HttpResponse(HTMLTemplate(article))
+    elif request.method == 'POST':
+        title = request.POST['title']
+        body=request.POST['body']
+        newTopic={"id":nextId, "title":title,"body":body}
+        topics.append(newTopic)
+        url='/read/'+str(nextId)
+        nextId+=1
+        return redirect(url)
 
 def read(request, id):
     global topics
