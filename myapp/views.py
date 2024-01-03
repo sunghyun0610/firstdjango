@@ -19,6 +19,7 @@ def HTMLTemplate(articleTag):
         {ol}
     </ul>
     {articleTag}
+    
     <ul>
         <li><a href="/create/">Create</a></li>
     </ul>
@@ -37,8 +38,11 @@ def index(request):
 
 def create(request):
     article='''
-    <p><input type="text" name="title" placeholder="write title"></p> 
-    <p><textarea></textarea>
+    <form action="/create/">
+        <p><input type="text" name="title" placeholder="write title"></p> 
+        <p><textarea name="body" placeholder="body"></textarea></p>
+        <p><input type="submit" value="제출"></p>
+    </form>
     '''
     # title : 입력한 데이터를 서버로 전송할때 title이라는 이름으로 감
     # placeholder : 칸안에 도움말이다
