@@ -71,3 +71,4 @@ def read(request, id):
     return HttpResponse(HTMLTemplate(article))
 
 # 1일 1커밋..이상
+# commit commitiititttttttttt
