@@ -69,3 +69,5 @@ def read(request, id):
             article=f'<h2>{topic["title"]}</h2>{topic["body"]}'
 
     return HttpResponse(HTMLTemplate(article))
+
+# 1일 1커밋..이상
