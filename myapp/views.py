@@ -9,7 +9,7 @@ topics=[
     {'id':3,'title':'routing', 'body': 'Model is..'}
 ]
 
-def HTMLTemplate(articleTag):
+def HTMLTemplate(articleTag, id=None):
     global topics
     ol = ''
     for topic in topics:
@@ -25,6 +25,12 @@ def HTMLTemplate(articleTag):
     
     <ul>
         <li><a href="/create/">Create</a></li>
+        <li>
+            <form action="/delete" method="post">
+                <input type="hidden" name="id" value={id}>
+                <input type="submit" name="delete" value="delete">
+            </form>
+        </li>
     </ul>
     </body>
     </html>
